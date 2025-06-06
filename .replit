@@ -1,0 +1,80 @@
+modules = ["python-3.11"]
+
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Discord Bot"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "discord_bot_test"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Modern Bot"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Updated Bot"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Web Dashboard"
+
+[[workflows.workflow]]
+name = "Discord Bot"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pip install discord.py && python main.py"
+
+[[workflows.workflow]]
+name = "discord_bot_test"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pip install discord.py"
+
+[[workflows.workflow]]
+name = "Modern Bot"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python test_bot.py"
+
+[[workflows.workflow]]
+name = "Updated Bot"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python working_bot.py"
+
+[[workflows.workflow]]
+name = "Web Dashboard"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python web_dashboard.py"
+waitForPort = 5000
+
+[deployment]
+run = ["sh", "-c", "pip install discord.py && python main.py"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
